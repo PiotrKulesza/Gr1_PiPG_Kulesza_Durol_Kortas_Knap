@@ -37,9 +37,11 @@ public class Level : MonoBehaviour
         Impossible,
     }
 
-    private enum State {
-    Playing,
-    BirdDead,  
+    private enum State 
+    {
+        WaitingToStart,
+        Playing,
+        BirdDead,  
     }
 
     private void Awake()
@@ -48,18 +50,22 @@ public class Level : MonoBehaviour
         pipeList = new List<Pipe>();
         pipeSpawnTimerMax = 1f;
         SetDifficulty(Difficulty.Easy);
-        state = State.Playing;
+        state = State.WaitingToStart;
     }
     private void Start()
 
-    {
-        // CreateGapPipes(50f, 20f, 20f);      
+    {     
         Uni.GetInstance().OnDied += Uni_OnDied;
+        Uni.GetInstance().OnStartedPlaying += Uni_OnStartedPlaying;
+    }
+
+    private void Uni_OnStartedPlaying(object sender, System.EventArgs e)
+    {
+        state = State.Playing;
     }
 
     private void Uni_OnDied(object sender, System.EventArgs e)
     {
-        //  CMDebug.TextPopupMouse("dead");
         state = State.BirdDead;
     }
 
@@ -74,7 +80,6 @@ public class Level : MonoBehaviour
         pipeSpawnTimer -= Time.deltaTime;
         if(pipeSpawnTimer < 0)
         {
-            //Time to spawn another pipe
             pipeSpawnTimer += pipeSpawnTimerMax;
 
             float heightEdgeLimit = 10f;
@@ -95,11 +100,10 @@ public class Level : MonoBehaviour
             pipe.Move();
             if(isToTheRightOfBird && pipe.GetXPosition() <= BIRD_X_POSITION && pipe.IsBottom())
             {
-                //Pipe passed Bird
                 pipesPassedCount++;
             }
-            if(pipe.GetXPosition() < PIPE_DESTROY_X_POSITION)           {
-                // Destroy pipe
+            if(pipe.GetXPosition() < PIPE_DESTROY_X_POSITION)           
+            {
                 pipe.DestroySelf();
                 pipeList.Remove(pipe);
                 i--;

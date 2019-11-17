@@ -17,21 +17,55 @@ public class Uni : MonoBehaviour
     }
 
     public event EventHandler OnDied;
+    public event EventHandler OnStartedPlaying;
 
     private Rigidbody2D Unirigidbody2D;
+    private State state;
+
+
+    private enum State
+    {
+        WaitingToStart,
+        Playing,
+        Dead
+    }
+
 
     private void Awake()
     {
         instance = this;
         Unirigidbody2D = GetComponent<Rigidbody2D>();
+        Unirigidbody2D.bodyType = RigidbodyType2D.Static;
+        state = State.WaitingToStart;
     }
   
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        switch (state)
         {
-            Jump();
+            default:
+            case State.WaitingToStart:
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    state = State.Playing;
+                    Unirigidbody2D.bodyType = RigidbodyType2D.Dynamic;
+                    Jump();
+                    if (OnStartedPlaying != null) OnStartedPlaying(this, EventArgs.Empty);
+                }
+                break;
+            case State.Playing:
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    Jump();
+                }
+                break;
+            case State.Dead:
+                break;
+
         }
+
+
+        
     }
     private void Jump()
     {
