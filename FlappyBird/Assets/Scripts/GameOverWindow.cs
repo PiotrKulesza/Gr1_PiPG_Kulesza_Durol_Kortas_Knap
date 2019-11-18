@@ -23,6 +23,14 @@ public class GameOverWindow : MonoBehaviour
         Hide();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Loader.Load(Loader.Scene.SampleScene);
+        }
+    }
+
     private void Uni_OnDied(object sender, System.EventArgs e)
     {
         scoreText.text = Level.GetInstance().GetPipesPassedCount().ToString();
