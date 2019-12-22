@@ -1,2 +1,0 @@
-# Gr1_PiPG_Kulesza_Durol_Kortas_Knap
-Hello World
