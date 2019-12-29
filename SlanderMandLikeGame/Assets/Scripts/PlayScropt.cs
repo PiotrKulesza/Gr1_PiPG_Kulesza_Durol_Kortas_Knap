@@ -7,7 +7,7 @@ public class PlayScropt : MonoBehaviour
     public Color OnMouseOverColor = Color.red;
     public Color OnMouseExitColor = Color.white;
 
-   
+
 
 
     void OnMouseOver()
@@ -27,14 +27,14 @@ public class PlayScropt : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
-      
-        
+
+
     }
 }

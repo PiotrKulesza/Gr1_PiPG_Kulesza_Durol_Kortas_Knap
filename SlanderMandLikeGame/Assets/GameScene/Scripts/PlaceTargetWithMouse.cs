@@ -22,7 +22,7 @@ namespace UnityStandardAssets.SceneUtils
             {
                 return;
             }
-            transform.position = hit.point + hit.normal*surfaceOffset;
+            transform.position = hit.point + hit.normal * surfaceOffset;
             if (setTargetOn != null)
             {
                 setTargetOn.SendMessage("SetTarget", transform);
