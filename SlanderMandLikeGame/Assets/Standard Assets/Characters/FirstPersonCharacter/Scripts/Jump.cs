@@ -24,7 +24,7 @@ public class Jump : MonoBehaviour
     {
         timer += Time.deltaTime;
         seconds = (float)(timer % 60);
-        print(seconds);
+     //  print(seconds);
         if (Input.GetKeyDown(KeyCode.Space) && seconds >0.9)
         {
             
