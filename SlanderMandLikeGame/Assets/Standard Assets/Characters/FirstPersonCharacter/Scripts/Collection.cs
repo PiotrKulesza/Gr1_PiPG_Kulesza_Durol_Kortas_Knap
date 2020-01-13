@@ -23,7 +23,7 @@ public class Collection : MonoBehaviour
         
 
         if (coins == 5)
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(3);
         
     }
 }

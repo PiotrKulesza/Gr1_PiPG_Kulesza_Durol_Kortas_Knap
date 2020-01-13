@@ -19,7 +19,7 @@ public class MonsterMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        MoveSpeed = 2f;
         transform.position = new Vector3(Player.position.x - 50, 0);
     }
 
@@ -46,7 +46,7 @@ public class MonsterMove : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(2);
         }
     }
 }
